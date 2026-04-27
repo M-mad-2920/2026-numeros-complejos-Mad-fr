@@ -17,4 +17,5 @@ fun main() {
     complejo=Complejo()
     complejo.inicializar(3,4)
     println("El número complejo es: ${complejo.toString()}")
+    println("hola")
 }
