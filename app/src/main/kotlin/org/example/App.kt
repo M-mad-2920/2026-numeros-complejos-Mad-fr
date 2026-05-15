@@ -1,12 +1,12 @@
 package org.example
 
-class Complejo(private var real: Int=0, private var imaginario: Int=0) {
-    fun inicializar(real: Int, imaginario:Int){
+class Complejo(private var real: Double=0.0, private var imaginario: Double=0.0) {
+    fun inicializar(real: Double, imaginario:Double){
         this.real=real
         this.imaginario=imaginario
     }
     fun mostrar(){
-        println(this.toString())
+        println (this.toString())
     }
     override fun toString(): String {
         return "(${real},${imaginario})"
@@ -17,17 +17,42 @@ class Complejo(private var real: Int=0, private var imaginario: Int=0) {
             imaginario + otro.imaginario
         )
     }
+     fun restar(otro: Complejo): Complejo {
+        return Complejo(
+            real - otro.real,
+            imaginario - otro.imaginario
+        )
+    }
+    fun multiplicar(otro: Complejo): Complejo {
+        val nuevoReal = (this.real * otro.real) - (this.imaginario * otro.imaginario)
+        val nuevoImaginario = (this.real * otro.imaginario) + (this.imaginario * otro.real)
+        return Complejo(nuevoReal, nuevoImaginario)
+    }
+    fun dividir(otro: Complejo): Complejo {
+        val denominador = (otro.real * otro.real) + (otro.imaginario * otro.imaginario)
+        val nuevoReal = ((this.real * otro.real) + (this.imaginario * otro.imaginario)) / denominador
+        val nuevoImaginario = ((this.imaginario * otro.real) - (this.real * otro.imaginario)) / denominador
+        return Complejo(nuevoReal, nuevoImaginario)
+    }
 }
 
 fun main() {
-    var complejo: Complejo
-    complejo=Complejo()
-    complejo.inicializar(3,4)
-    println("El número complejo es: ${complejo.toString()}")
-    println("hola")
-    println("hola2.1")
-    var c2: Complejo=Complejo(3,3)
-    var c3: Complejo
-    c3=complejo.sumar(c2)
-    c3.mostrar()
+    val c1 = Complejo(3.0, 4.0)
+    val c2 = Complejo(1.0, 2.0)
+
+    println("Suma:")
+    val suma = c1.sumar(c2)
+    suma.mostrar()
+
+    println("Resta:")
+    val resta = c1.restar(c2)
+    resta.mostrar()
+
+    println("Multiplicación:")
+    val producto = c1.multiplicar(c2)
+    producto.mostrar()
+
+    println("División:")
+    val cociente = c1.dividir(c2)
+    cociente.mostrar()
 }
